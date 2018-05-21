@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Hootlex\Friendships\FriendshipsServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
 
     ],
 

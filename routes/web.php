@@ -1,9 +1,12 @@
 <?php
 
 use App\User;
-use App\Auth;
+use App\Interest;
+use Illuminate\Support\Facades\Auth;
 use App\Friendship;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,6 +16,20 @@ Route::get('/', function () {
 Route::get('/users', function () {
 	$users = User::all();
     return view('users.show', compact('users'));
+});
+
+// Filter users
+Route::get('/users/search', function (Request $request) {
+	$param = $request->input('search');
+	$firstChar = substr($param, 0, 1);
+	$rest = substr($param, 1);
+	if ($firstChar == '#') {
+		$temp = DB::table('users')->join('usersInterests', 'users.id', '=', 'usersInterests.userid')->leftJoin('interests', 'interests.id', '=', 'usersInterests.interestid')->get();
+		$users = $temp->where('sport', $rest);
+	} else {
+		$users = User::where('name', $param)->get();
+	};
+	return view('users.show', compact('users'));
 });
 
 // Profile page
@@ -71,6 +88,13 @@ Route::get('/users/{user}/deny', function ($id) {
 	return Redirect::to('users/' . $user->id . '/requests');
 });
 
+Route::group(['prefix' => 'messages'], function () {
+    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+});
 
 
 
@@ -79,3 +103,8 @@ Route::get('/users/{user}/deny', function ($id) {
 
 
 
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
