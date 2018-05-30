@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@extends('layouts.test')
 @section('content')
 <div class="container">
     <div class="row">
@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    
                     You are logged in!
                 </div>
             </div>

@@ -31,6 +31,7 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    @yield('navbar')
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
