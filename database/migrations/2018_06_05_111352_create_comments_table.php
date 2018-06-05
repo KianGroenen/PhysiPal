@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersInterestsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUsersInterestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('usersInterests', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('postid')->unsigned();
+            $table->foreign('postid')->references('id')->on('posts')->onDelete('cascade');
             $table->integer('userid')->unsigned();
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('interestid')->unsigned();
-            $table->foreign('interestid')->references('id')->on('interests')->onDelete('cascade');
-            $table->string('level');
+            $table->string('comment');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateUsersInterestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_interests');
+        Schema::dropIfExists('comments');
     }
 }

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
+// Newsfeed
+Route::get('/', 'PostController@index')->middleware('auth');
+Route::get('/newsfeed', 'PostController@index')->middleware('auth');
 
 // Search ALL users
 Route::get('/users', function () {
@@ -33,9 +33,18 @@ Route::get('/users/search', function (Request $request) {
 });
 
 // Profile page
-Route::get('/users/{user}', function ($id) {
+Route::get('/users/{id}', 'PostController@show');
+//Route::get('/users/{user}', function ($id) {
+//	$user = User::find($id);
+//  return view('users.profile', compact('user'));
+//});
+
+// Frieded user
+Route::get('/users/{user}/friends', function ($id) {
 	$user = User::find($id);
-    return view('users.profile', compact('user'));
+	$friendID = Friendship::where('recipient_id', $id)->where('status', 1)->pluck('sender_id');
+	$friends = User::find($friendID);
+	return view('users.profile', compact('friends', 'user'));
 });
 
 // Befriend user
@@ -67,7 +76,8 @@ Route::get('/users/{user}/requests', function ($id) {
 	//Put in real user (dummy user 1)
 	$senderID = Friendship::where('recipient_id', Auth::id())->where('status', 0)->pluck('sender_id');
 	$requests = User::find($senderID);
-    return view('notifications.show', compact('requests'));
+	$user = User::find($id);
+    return view('users.profile', compact('requests', 'user'));
 });
 
 // Accept Friend Requests
@@ -110,5 +120,3 @@ Route::group(['prefix' => 'messages'], function () {
 
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
