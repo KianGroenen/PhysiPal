@@ -53,8 +53,9 @@ class PostController extends Controller
     {
         $posts = Post::where('userid', $id)->get();
         $user = User::find($id);
+        $users = User::all();
         $comments = Comment::all();
-        return view('users.profile', compact('posts', 'user', 'comments'));
+        return view('users.profile', compact('posts', 'user', 'comments', 'users'));
     }
 
     /**

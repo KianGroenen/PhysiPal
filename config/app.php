@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Hootlex\Friendships\FriendshipsServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -227,6 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

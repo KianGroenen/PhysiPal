@@ -14,7 +14,7 @@ class User extends Authenticatable
     use Messagable;
 
     public function interests() {
-        return $this->belongsToMany('App\Interest', 'usersInterests');
+        return $this->belongsToMany('App\Interest', 'usersInterests', 'userid', 'interestid')->withPivot('level');
     }
 
     /**

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Interest;
 use App\User;
 use Auth;
-use Image;
 
-class UserController extends Controller
+class InterestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::find(Auth::id());
+        $interests = User::find(Auth::id())->interests;
+        $is = Interest::all();
+        //$user->interests()->attach(1, ['level' => 'SUKKKERR']);
+        return view('interests', compact('user', 'interests', 'is'));
     }
 
     /**
@@ -37,7 +41,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::find(Auth::id());
+        $user->interests()->attach($request->sport, ['level' => $request->level]);
+        return back();
     }
 
     /**
@@ -59,10 +65,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find(Auth::id());
-        $edit = true;
-        return view('users.profile', compact('user', 'edit'));
-
+        //
     }
 
     /**
@@ -74,30 +77,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!empty($request->input('name')) && !empty($request->input('email'))) {
-            $user = User::find(Auth::id());
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            
-            if (!empty($request->input('password'))) {
-                $user->password = bcrypt($request->input('password'));
-            }
-            
-            $user->about = $request->input('about');
-            
-            if ($request->hasFile('photo')) {
-                $this->validate($request, [
-                  'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]);
-                $image = $request->file('photo');
-                $name = str_slug($request->input('name')).'.'.$image->getClientOriginalExtension();
-                $destinationPath = public_path('/uploads/avatars');
-                $imagePath = $destinationPath. "/".  $name;
-                $image->move($destinationPath, $name);
-                $user->avatar = $name;
-            }
-            $user->save();
-        }
+        //
     }
 
     /**

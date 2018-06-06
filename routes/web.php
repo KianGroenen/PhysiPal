@@ -34,10 +34,10 @@ Route::get('/users/search', function (Request $request) {
 
 // Profile page
 Route::get('/users/{id}', 'PostController@show');
-//Route::get('/users/{user}', function ($id) {
-//	$user = User::find($id);
-//  return view('users.profile', compact('user'));
-//});
+Route::post('/users/{id}', 'UserController@update');
+Route::get('/users/{id}/edit', 'UserController@edit');
+Route::get('interests', 'InterestController@index');
+Route::post('interests/store', 'InterestController@store');
 
 // Frieded user
 Route::get('/users/{user}/friends', function ($id) {
