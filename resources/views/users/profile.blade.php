@@ -13,10 +13,12 @@
 	<a href="/users/{{$user->id}}">Recent Posts</a>
 	<a href="/users/{{$user->id}}/friends">Pals</a>
 	<a href="/users/{{$user->id}}/requests">Friend Requests</a>
+	@if ($user->id == Auth::id())
 	<a href="">My Info</a>
 	<a href="#">Premium User</a>
-	<a href="">Sports Added</a>
+	<a href="/users/{{$user->id}}/interests">Sports Added</a>
 	<a href="/users/{{$user->id}}/edit">Account Info</a>
+	@endif
 	<div class="container">
 		@if (isset($posts))
 		@foreach($posts as $post)
@@ -79,6 +81,25 @@
 	</div>
 
 	<div class="container">
-		
+		@if (isset($interests))
+		@foreach ($interests as $interest)
+			<p>Sport</p><p>{{$interest->sport}}</p><p>Level</p><p>{{$interest->pivot->level}}</p><br>
+		@endforeach
+		<form action="/users/{{$user->id}}/interests/store" method="POST">
+			<label for="sport">Add a new sport</label>
+			<select name="sport">
+			@foreach ($is as $i)
+				<option value="{{$i->id}}">{{$i->sport}}</option>
+			@endforeach
+			</select>
+			<select name="level">
+				<option value="Beginner">Beginner</option>
+				<option value="Intermediate">Intermediate</option>
+				<option value="Expert">Expert</option>
+			</select>
+			{{ csrf_field() }}
+			<input type="submit">
+		</form>
+		@endif
 	</div>
 @stop

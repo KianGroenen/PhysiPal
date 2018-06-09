@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Comment;
+use Auth;
 
 class PostController extends Controller
 {
@@ -16,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderByDesc('created_at')->get();
         $users = User::all();
         $comments = Comment::all();
         return view('home', compact('posts', 'users', 'comments'));
@@ -40,7 +41,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!empty($request->post)) {
+            $post = New Post;
+            $post->userid = Auth::id();
+            $post->post = $request->post;
+            $post->save();
+        }
+        return back();
     }
 
     /**
@@ -51,7 +58,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $posts = Post::where('userid', $id)->get();
+        $posts = Post::where('userid', $id)->orderByDesc('created_at')->get();
         $user = User::find($id);
         $users = User::all();
         $comments = Comment::all();
@@ -78,7 +85,12 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        if (!empty($request->post)) {
+            $post->post = $request->post;
+            $post->save();
+        }
+        return back();
     }
 
     /**
@@ -89,6 +101,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return back();
     }
 }

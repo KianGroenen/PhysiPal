@@ -20,7 +20,7 @@ class InterestController extends Controller
         $interests = User::find(Auth::id())->interests;
         $is = Interest::all();
         //$user->interests()->attach(1, ['level' => 'SUKKKERR']);
-        return view('interests', compact('user', 'interests', 'is'));
+        return view('users.profile', compact('user', 'interests', 'is'));
     }
 
     /**
@@ -43,7 +43,7 @@ class InterestController extends Controller
     {
         $user = User::find(Auth::id());
         $user->interests()->attach($request->sport, ['level' => $request->level]);
-        return back();
+        return view('users.profile', compact('user'));
     }
 
     /**

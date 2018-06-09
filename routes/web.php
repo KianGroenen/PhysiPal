@@ -11,33 +11,26 @@ use Illuminate\Support\Facades\DB;
 // Newsfeed
 Route::get('/', 'PostController@index')->middleware('auth');
 Route::get('/newsfeed', 'PostController@index')->middleware('auth');
+Route::post('/users/posts/store', 'PostController@store')->middleware('auth');
+Route::post('/users/posts/{id}/update', 'PostController@update')->middleware('auth');
+Route::delete('/users/posts/{id}/delete', 'PostController@destroy')->middleware('auth');
 
 // Search ALL users
 Route::get('/users', function () {
 	$users = User::all();
-    return view('users.show', compact('users'));
-});
+	$interests = Interest::all();
+    return view('users.show', compact('users', 'interests'));
+})->middleware('auth');
 
 // Filter users
-Route::get('/users/search', function (Request $request) {
-	$param = $request->input('search');
-	$firstChar = substr($param, 0, 1);
-	$rest = substr($param, 1);
-	if ($firstChar == '#') {
-		$temp = DB::table('users')->join('usersInterests', 'users.id', '=', 'usersInterests.userid')->leftJoin('interests', 'interests.id', '=', 'usersInterests.interestid')->get();
-		$users = $temp->where('sport', $rest);
-	} else {
-		$users = User::where('name', $param)->get();
-	};
-	return view('users.show', compact('users'));
-});
+Route::get('/users/search', 'SearchController@filter');
 
 // Profile page
-Route::get('/users/{id}', 'PostController@show');
-Route::post('/users/{id}', 'UserController@update');
-Route::get('/users/{id}/edit', 'UserController@edit');
-Route::get('interests', 'InterestController@index');
-Route::post('interests/store', 'InterestController@store');
+Route::get('/users/{id}', 'PostController@show')->middleware('auth');
+Route::post('/users/{id}', 'UserController@update')->middleware('auth');
+Route::get('/users/{id}/edit', 'UserController@edit')->middleware('auth');
+Route::get('/users/{id}/interests', 'InterestController@index')->middleware('auth');
+Route::post('/users/{id}/interests/store', 'InterestController@store')->middleware('auth');
 
 // Frieded user
 Route::get('/users/{user}/friends', function ($id) {
@@ -45,7 +38,7 @@ Route::get('/users/{user}/friends', function ($id) {
 	$friendID = Friendship::where('recipient_id', $id)->where('status', 1)->pluck('sender_id');
 	$friends = User::find($friendID);
 	return view('users.profile', compact('friends', 'user'));
-});
+})->middleware('auth');
 
 // Befriend user
 Route::get('/users/{user}/sent', function ($id) {
