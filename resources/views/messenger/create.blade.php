@@ -7,8 +7,7 @@
         <div class="col-md-6">
             <!-- Subject Form Input -->
             <div class="form-group">
-                <label class="control-label">Subject</label>
-                <input type="text" class="form-control" name="subject" placeholder="Subject"
+                <input type="hidden" class="form-control" name="subject" placeholder="Subject"
                        value="{{ old('subject') }}">
             </div>
 

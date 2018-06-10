@@ -81,11 +81,15 @@ class MessagesController extends Controller
     public function store()
     {
         $input = Input::all();
-
+        var_dump($input['recipients']);
+        if (Input::has('recipients')) {
+            $user = User::find($input['recipients'][0]);
+        }
         $thread = Thread::create([
-            'subject' => $input['subject'],
+            //'subject' => $input['subject'],
+            'subject' => $user->name,
         ]);
-
+        
         // Message
         Message::create([
             'thread_id' => $thread->id,

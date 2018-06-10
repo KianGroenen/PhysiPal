@@ -6,7 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "cmgmyr/messenger": "^2.15",
+        "cmgmyr/messenger": "^2.16",
         "fideloper/proxy": "~3.3",
         "hootlex/laravel-friendships": "^1.0",
         "intervention/image": "^2.4",
