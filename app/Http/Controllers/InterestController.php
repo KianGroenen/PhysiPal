@@ -43,7 +43,7 @@ class InterestController extends Controller
     {
         $user = User::find(Auth::id());
         $user->interests()->attach($request->sport, ['level' => $request->level]);
-        return view('users.profile', compact('user'));
+        return back();
     }
 
     /**
@@ -88,6 +88,8 @@ class InterestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find(Auth::id());
+        $user->interests()->detach($id);
+        return back();
     }
 }

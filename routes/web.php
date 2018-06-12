@@ -14,6 +14,14 @@ Route::get('/newsfeed', 'PostController@index')->middleware('auth');
 Route::post('/users/posts/store', 'PostController@store')->middleware('auth');
 Route::post('/users/posts/{id}/update', 'PostController@update')->middleware('auth');
 Route::delete('/users/posts/{id}/delete', 'PostController@destroy')->middleware('auth');
+Route::post('/users/comments/{id}/store', 'CommentController@store')->middleware('auth');
+Route::post('/users/comments/{id}/update', 'CommentController@update')->middleware('auth');
+Route::delete('/users/comments/{id}/delete', 'CommentController@destroy')->middleware('auth');
+Route::delete('/interests/{id}/delete', 'InterestController@destroy')->middleware('auth');
+
+Route::get('/credits/{id}', function ($id) {
+	return view('credits');
+});
 
 // Search ALL users
 Route::get('/users', function () {
@@ -73,6 +81,15 @@ Route::get('/users/{user}/requests', function ($id) {
     return view('users.profile', compact('requests', 'user'));
 });
 
+// See Pending Requests
+Route::get('/users/{user}/pending', function ($id) {
+	//Put in real user (dummy user 1)
+	$recipientID = Friendship::where('sender_id', Auth::id())->where('status', 0)->pluck('recipient_id');
+	$pending = User::find($recipientID);
+	$user = User::find($id);
+    return view('users.profile', compact('pending', 'user'));
+});
+
 // Accept Friend Requests
 Route::get('/users/{user}/accept', function ($id) {
 	$userid = Auth::id();
@@ -81,7 +98,18 @@ Route::get('/users/{user}/accept', function ($id) {
 	//$user = User::find(1);
 	$sender = User::find($id);
 	$user->acceptFriendRequest($sender);
-	return Redirect::to('users/' . $user->id . '/requests');
+	return back();
+});
+
+// Cancel Friend Requests
+Route::get('/users/{user}/cancel', function ($id) {
+	$userid = Auth::id();
+	$user = User::find($userid);
+	//Recipient
+	//$user = User::find(1);
+	$sender = User::find($id);
+	$sender->denyFriendRequest($user);
+	return back();
 });
 
 // Deny Friend Requests
@@ -92,7 +120,7 @@ Route::get('/users/{user}/deny', function ($id) {
 	//$user = User::find(1);
 	$sender = User::find($id);
 	$user->denyFriendRequest($sender);
-	return Redirect::to('users/' . $user->id . '/requests');
+	return back();
 });
 
 Route::group(['prefix' => 'messages'], function () {

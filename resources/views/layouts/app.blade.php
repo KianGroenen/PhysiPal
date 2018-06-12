@@ -26,10 +26,11 @@
                     @else
                     @yield('navbar')
                     @endguest
-                    </nav>
                 </div>
-        @yield('content')
-    </div>
+            </div>
+        </nav>
+    @yield('content')
+    @yield('side')
 </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

@@ -1,10 +1,10 @@
 @section('navbar')
+{{-- Navigation --}}
 <nav>
 	<a href="/newsfeed">Newsfeed</a>
 	<a href="/users">Palfinder</a>
 	<a href="/users/{{Auth::id()}}">Profile</a>
-	<a href="">Credits</a>
-	<a href="/users/{{Auth::id()}}/requests">Friend Requests</a>
+	<a href="/credits/{{Auth::id()}}">Credits</a>
 	<a href="/messages">Messages</a>
     <a href="{{ route('logout') }}"
         onclick="event.preventDefault();
