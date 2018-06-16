@@ -41,6 +41,19 @@
 					<label for="post" class="control-label">
 						<p class="text-info">{{$post->post}}</p>
 					</label>
+					<img src="{{ URL::to('/') }}/uploads/media/{{$post->media}}" alt="">
+					{{-- Post Likes --}}
+					<h2><small>{{ $post->likes()->count() }} <i class="fa fa-thumbs-up"></i></small></h2>
+					<p>
+				    @foreach ($post->likes as $user)
+				        {{ $user->name }}, 
+				    @endforeach
+					<span>like this!</span></p>
+				    @if ($post->isLiked)
+				        <a href="{{ route('post.like', $post->id) }}">Unlike</a>
+				    @else
+				        <a href="{{ route('post.like', $post->id) }}">Like</a>
+				    @endif
 					{{-- Form to update post --}}
 					<form action="/users/posts/{{$post->id}}/update" method="POST">
 						<input type="text" class="edit-input" name="post" />

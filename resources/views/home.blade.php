@@ -4,9 +4,10 @@
 @section('content')
 {{-- Make a post --}}
 <h2>Post something on your wall</h2>
-<form action="/users/posts/store" method="POST">
+<form action="/users/posts/store" method="POST" enctype="multipart/form-data">
 	<label for="post"></label>
 	<input type="longtext" name="post">
+	<input type="file" name="photo">
 	{{ csrf_field() }}
 	<input type="submit" name="submit" value="Send Post">
 </form>
@@ -22,6 +23,19 @@
 			<label for="post" class="control-label">
 				<p class="text-info">{{$post->post}}</p>
 			</label>
+			<img src="{{ URL::to('/') }}/uploads/media/{{$post->media}}" alt="">
+			{{-- Post Likes --}}
+			<h2><small>{{ $post->likes()->count() }} <i class="fa fa-thumbs-up"></i></small></h2>
+			<p>
+		    @foreach ($post->likes as $user)
+		        {{ $user->name }}, 
+		    @endforeach
+			<span>like this!</span></p>
+		    @if ($post->isLiked)
+		        <a href="{{ route('post.like', $post->id) }}">Unlike</a>
+		    @else
+		        <a href="{{ route('post.like', $post->id) }}">Like</a>
+		    @endif
 			
 			{{-- Form to update post --}}
 			<form action="/users/posts/{{$post->id}}/update" method="POST">
@@ -74,8 +88,8 @@
 					{{-- Controls to open edit field --}}
 					@if ($user->id == Auth::id())
 					<div class="controls">
-					        <a class="edit {{$comment->id}}" href="#">Edit</a>
-					        <a class="cancel {{$comment->id}} edit-input" href="#">Cancel</a>
+					        <a class="edit {{$comment->id}}" href="">Edit</a>
+					        <a class="cancel {{$comment->id}} edit-input" href="">Cancel</a>
 					</div>
 					@endif
 				</div>
@@ -84,26 +98,4 @@
 	@endif
 @endforeach
 @endforeach
-<script type="text/javascript">
-	//$('body').on('click', 'a.edit', function() {
-	$('a.edit').click(function () {
-        var dad = $(this).parent().parent();
-        dad.find('label').hide();
-        var str = $.trim(dad.find('label').text());
-        dad.find('input[type="text"]').val(str);
-        dad.find('input[type="text"]').show().focus();
-        dad.find('input[type="submit"]').show();
-        dad.find('a.cancel').show();
-        dad.find('a.delete').show();
-    });
-
-	$('a.cancel').click(function (){
-		var dad = $(this).parent().parent();
-		dad.find('input[type="text"]').hide()
-        dad.find('input[type="submit"]').hide();
-        dad.find('a.delete').hide();
-        $(this).hide();
-        dad.find('label').show();
-	});
-</script>
 @stop

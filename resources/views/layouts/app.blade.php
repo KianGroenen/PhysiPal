@@ -34,5 +34,6 @@
 </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/dev.js') }}"></script>
 </body>
 </html>

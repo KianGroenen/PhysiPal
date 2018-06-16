@@ -17,6 +17,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Interest', 'usersInterests', 'userid', 'interestid')->withPivot('level');
     }
 
+    public function likedPosts()
+    {
+        return $this->morphedByMany('App\Post', 'likeable')->whereDeletedAt(null);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

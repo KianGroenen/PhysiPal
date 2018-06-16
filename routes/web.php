@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+// Likes
+Route::get('post/like/{id}', ['as' => 'post.like', 'uses' => 'LikeController@likePost']);
+
 // Newsfeed
 Route::get('/', 'PostController@index')->middleware('auth');
 Route::get('/newsfeed', 'PostController@index')->middleware('auth');

@@ -45,6 +45,19 @@ class PostController extends Controller
             $post = New Post;
             $post->userid = Auth::id();
             $post->post = $request->post;
+
+            if ($request->hasFile('photo')) {
+                $this->validate($request, [
+                  'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+                $image = $request->file('photo');
+                $name = str_slug(substr($request->input('post'), 0, 30)).'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path('/uploads/media');
+                $imagePath = $destinationPath. "/".  $name;
+                $image->move($destinationPath, $name);
+                $post->media = $name;
+            }
+
             $post->save();
         }
         return back();
