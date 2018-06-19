@@ -21,6 +21,11 @@ class CreateUsersTable extends Migration
             $table->longtext('about')->nullable($value = true);
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('street')->nullable($value = true);
+            $table->string('zipcode')->nullable($value = true);
+            $table->string('city')->nullable($value = true);
+            $table->string('lat')->nullable($value = true);
+            $table->string('lon')->nullable($value = true);
             $table->rememberToken();
             $table->timestamps();
         });

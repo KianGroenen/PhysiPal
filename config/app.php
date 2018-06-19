@@ -179,6 +179,8 @@ return [
         Hootlex\Friendships\FriendshipsServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
+        Ixudra\Geo\GeoServiceProvider::class,
 
     ],
 
@@ -229,6 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
+        'Geo' => Ixudra\Geo\Facades\Geo::class,
 
     ],
 

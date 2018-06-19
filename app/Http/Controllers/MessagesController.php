@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use App\Friendship;
 
 class MessagesController extends Controller
 {
@@ -68,7 +69,10 @@ class MessagesController extends Controller
      */
     public function create()
     {
-        $users = User::where('id', '!=', Auth::id())->get();
+        //change to friends only
+        $friendID = Friendship::where('recipient_id', Auth::id())->where('status', 1)->pluck('sender_id');
+        $users = User::find($friendID);
+        //$users = User::where('id', '!=', Auth::id())->get();
 
         return view('messenger.create', compact('users'));
     }

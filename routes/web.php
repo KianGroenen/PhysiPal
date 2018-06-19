@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+// Geo Location
+Route::post('/updateLocation', 'LocationController@updateLocation');
+
 // Likes
 Route::get('post/like/{id}', ['as' => 'post.like', 'uses' => 'LikeController@likePost']);
 

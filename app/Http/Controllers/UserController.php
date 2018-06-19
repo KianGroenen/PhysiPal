@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Image;
+use Ixudra\Geo\Facades\Geo;
 
 class UserController extends Controller
 {
@@ -79,6 +80,23 @@ class UserController extends Controller
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             
+            if (!empty($request->input('street')) && 
+                !empty($request->input('zipcode')) && 
+                !empty($request->input('city'))) {
+                $user->street = $request->input('street');
+                $user->zipcode = $request->input('zipcode');
+                $user->city = $request->input('city');
+                $street = $request->input('street');
+                $zipcode = $request->input('zipcode');
+                $city = $request->input('city');
+                $address = trim($street) . ", " .
+                        trim($zipcode) . " " .
+                        trim($city);
+                $temp = Geo::geocode($address);
+                $user->lat = $temp->lat;
+                $user->lon = $temp->lng;
+            }
+
             if (!empty($request->input('password'))) {
                 $user->password = bcrypt($request->input('password'));
             }

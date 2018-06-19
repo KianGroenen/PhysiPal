@@ -180,6 +180,12 @@
 			<input type="password" name="password">
 			<label for="about">About me</label>
 			<input type="longtext" name="about" value="{{$user->about}}">
+			<label for="street">Street and Number</label>
+			<input type="text" name="street" value="{{$user->street}}">
+			<label for="zipcode">Zip Code</label>
+			<input type="text" name="zipcode" id="" value="{{$user->zipcode}}">
+			<label for="city">City / Town</label>
+			<input type="text" name="city" value="{{$user->city}}">
 			<label for="photo">Avatar</label>
 			<input type="file" name="photo">
 			{{ csrf_field() }}
