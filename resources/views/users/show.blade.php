@@ -2,6 +2,7 @@
 @extends('layouts.nav')
 @extends('layouts.side')
 @section('content')
+<div class="middle">
 	@if (Session::has('message'))
 		<div class="alert alert-success">
 			{{Session::get('message')}}
@@ -41,3 +42,4 @@
 	@endif
 	</ul>
 @endsection
+</div>

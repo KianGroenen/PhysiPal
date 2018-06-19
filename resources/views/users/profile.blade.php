@@ -4,31 +4,34 @@
 @extends('layouts.side')
 {{-- 'Content' gets 'yielded' in base file, app.blade.php --}}
 @section('content')
-	{{-- Profile Page --}}
-	<h1>{{$user->name}}</h1>
-	<img src="{{ URL::to('/') }}/uploads/avatars/{{$user->avatar}}">
-	<p>{{$user->about}}</p>
-	{{-- Links towards content on profile page --}}
-	{{-- These 2 links will show when it isn't the logged in user --}}
-	@if ($user->id != Auth::id())
-	<a href="/users/{{$user->id}}/sent">Add Friend</a>
-	<a href="/users/{{$user->id}}/remove">Remove Friend</a>
-	@endif
-	{{-- These 2 links will always show --}}
-	<a href="/users/{{$user->id}}">Recent Posts</a>
-	<a href="/users/{{$user->id}}/friends">Pals</a>
-	{{-- Next 4 links will only show when it's the logged in user (editing posts, account info, etc) --}}
-	@if ($user->id == Auth::id())
-	<a href="/users/{{$user->id}}/requests">Pal Requests</a>
-	<a href="/users/{{$user->id}}/pending">Pending Pals</a>
-	@endif
-	@if ($user->id == Auth::id())
-	<a href="">My Info</a>
-	<a href="#">Premium User</a>
-	<a href="/users/{{$user->id}}/interests">Sports Added</a>
-	<a href="/users/{{$user->id}}/edit">Account Info</a>
-	@endif
-
+<div class="middle">
+	<div class="profile-page">
+		{{-- Profile Page --}}
+		<h1>{{$user->name}}</h1>
+		<img src="{{ URL::to('/') }}/uploads/avatars/{{$user->avatar}}">
+		<p>{{$user->about}}</p>
+		{{-- Links towards content on profile page --}}
+		{{-- These 2 links will show when it isn't the logged in user --}}
+		@if ($user->id != Auth::id())
+		<a href="/users/{{$user->id}}/sent">Add Friend</a>
+		<a href="/users/{{$user->id}}/remove">Remove Friend</a>
+		@endif
+		{{-- These 2 links will always show --}}
+		<a href="/users/{{$user->id}}">Recent Posts</a>
+		<a href="/users/{{$user->id}}/friends">Pals</a>
+		{{-- Next 4 links will only show when it's the logged in user (editing posts, account info, etc) --}}
+		@if ($user->id == Auth::id())
+		<a href="/users/{{$user->id}}/requests">Pal Requests</a>
+		<a href="/users/{{$user->id}}/pending">Pending Pals</a>
+		@endif
+		@if ($user->id == Auth::id())
+		<a href="">My Info</a>
+		<a href="#">Premium User</a>
+		<a href="/users/{{$user->id}}/interests">Sports Added</a>
+		<a href="/users/{{$user->id}}/edit">Account Info</a>
+		@endif
+	</div>
+	
 	{{-- All posts --}}
 	<div class="container">
 		@if (isset($posts))
@@ -214,4 +217,5 @@
 		</form>
 		@endif
 	</div>
+</div>
 @stop

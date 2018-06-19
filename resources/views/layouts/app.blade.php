@@ -8,32 +8,36 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Physipal') }}</title>
 
     <!-- Styles -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dev.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/screen.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    @guest
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @else
-                    @yield('navbar')
-                    @endguest
+    <div class="grid-container">
+        <div class="left">
+                <nav>
+                            @guest
+                                <a href="{{ route('login') }}">Login</a>
+                                <a href="{{ route('register') }}">Register</a>
+                            @else
+                            @yield('navbar')
+                            @endguest
+                </nav>
+
+                <div class="footer">
+                    <a href="https://www.instagram.com/physipal/"><img src="../img/instagram.svg" alt="icon instagram"/></a>
+                    <a href="https://twitter.com/Physipal1"><img src="../img/twitter.svg" alt="icon twitter"/></a>
+                    <a href="https://www.facebook.com/PhysipalBE/"><img src="../img/facebook.svg" alt="icon facebook"/></a>
                 </div>
-            </div>
-        </nav>
+        </div>
     @yield('content')
     @yield('side')
 </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/dev.js') }}"></script>
 </body>
 </html>

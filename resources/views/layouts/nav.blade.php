@@ -1,21 +1,22 @@
 @section('navbar')
 {{-- Navigation --}}
-<nav>
-	<a href="/newsfeed">Newsfeed</a>
-	<a href="/users">Palfinder</a>
-	<a href="/users/{{Auth::id()}}">Profile</a>
-	<a href="/credits/{{Auth::id()}}">Credits</a>
-	<a href="/messages">Messages</a>
+
+<nav class="main-nav">
+	<a href="/newsfeed" src="../img/logo.svg" id="logo"><img src="../img/logo.svg" alt="logo physipal"/></a>
+	<a href="/newsfeed">NEWSFEED</a>
+	<a href="/users">PALFINDER</a>
+	<a href="/users/{{Auth::id()}}">PROFILE</a>
+	<a href="/credits/{{Auth::id()}}">CREDITS</a>
+	<a href="/messages">MESSAGES</a>
     <a href="{{ route('logout') }}"
         onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">
-        Logout
+        LOGOUT
     </a>
 
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
-    </form>
-                                    
+    </form>                                
 </nav>
 @endsection
 

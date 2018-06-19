@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="15px" viewBox="0 0 14 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Coins</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Coins" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13.5714286,2.85714286 C13.5714286,4.43464286 10.5328571,5.71428571 6.78571429,5.71428571 C3.03857143,5.71428571 0,4.43464286 0,2.85714286 C0,1.27928571 3.03857143,0 6.78571429,0 C10.5328571,0 13.5714286,1.27928571 13.5714286,2.85714286 Z" id="Stroke-1" stroke="#FFFFFF"></path>
+        <path d="M13.5714286,5.71428571 C13.5714286,7.29178571 10.5328571,8.57142857 6.78571429,8.57142857 C3.03857143,8.57142857 0,7.29178571 0,5.71428571" id="Stroke-3" stroke="#FFFFFF"></path>
+        <path d="M13.5714286,8.92857143 C13.5714286,10.5060714 10.5328571,11.7857143 6.78571429,11.7857143 C3.03857143,11.7857143 0,10.5060714 0,8.92857143" id="Stroke-5" stroke="#FFFFFF"></path>
+        <path d="M0,2.85714286 L0,12.1428571 C0,13.7203571 3.03857143,15 6.78571429,15 C10.5328571,15 13.5714286,13.7203571 13.5714286,12.1428571 L13.5714286,2.85714286" id="Stroke-7" stroke="#FFFFFF"></path>
+    </g>
+</svg>

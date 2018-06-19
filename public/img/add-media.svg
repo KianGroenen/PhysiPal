@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>add-pic</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="28" height="28" rx="5"></rect>
+        <filter x="-25.0%" y="-17.9%" width="150.0%" height="150.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="V2.0-Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="DASHBOARD" transform="translate(-1059.000000, -910.000000)">
+            <g id="TELLPALS" transform="translate(494.000000, 896.000000)">
+                <g id="add-pic" transform="translate(569.000000, 16.000000)">
+                    <g id="Rectangle-7-Copy">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="add-picture" transform="translate(5.000000, 6.000000)" fill="#5F25E1">
+                        <g id="Fill-455">
+                            <path d="M15.47838,12.12273 L12.63798,7.20243 L15.96348,7.20243 C16.11198,7.77843 16.20018,8.37963 16.20018,9.00243 C16.20018,10.12113 15.93558,11.17683 15.47838,12.12273 L15.47838,12.12273 Z M9.53568,16.17453 L12.63708,10.80243 L14.36238,13.79043 C13.15458,15.14133 11.44998,16.03143 9.53568,16.17453 L9.53568,16.17453 Z M2.77398,12.60243 L9.51948,12.60243 L7.52868,16.04943 C5.49918,15.62643 3.78468,14.34213 2.77398,12.60243 L2.77398,12.60243 Z M2.52198,5.88033 L5.36238,10.80243 L2.03688,10.80243 C1.88748,10.22553 1.80018,9.62433 1.80018,9.00243 C1.80018,7.88373 2.06388,6.82623 2.52198,5.88033 L2.52198,5.88033 Z M8.46558,1.82853 L5.36238,7.20243 L3.63798,4.21353 C4.84578,2.86263 6.55038,1.96983 8.46558,1.82853 L8.46558,1.82853 Z M11.59758,9.00243 L10.55898,10.80243 L7.44048,10.80243 L6.40188,9.00243 L7.44138,7.20243 L10.55898,7.20243 L11.59758,9.00243 Z M15.22548,5.40243 L8.48088,5.40243 L10.47168,1.95453 C12.50118,2.37753 14.21568,3.66183 15.22548,5.40243 L15.22548,5.40243 Z M9.00018,0.00243 C4.03758,0.00243 0.00018,4.03893 0.00018,9.00243 C0.00018,13.96503 4.03758,18.00153 9.00018,18.00153 C13.96278,18.00153 18.00018,13.96503 18.00018,9.00243 C18.00018,4.03893 13.96278,0.00243 9.00018,0.00243 L9.00018,0.00243 Z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
