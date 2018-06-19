@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Interest;
 use Auth;
+use Ixudra\Geo\Facades\Geo;
 
 class SearchController extends Controller
 {
@@ -20,10 +21,27 @@ class SearchController extends Controller
                                 ->where('level', $request->level);
             }
         }
+        //VARS
+        $slider = $request->slider * 1000;
+        $filtered = Array();
         $filters = $temp;
+        $user = Auth::User();
+        $street = $user->street;
+        $zipcode = $user->zipcode;
+        $city = $request->city;
+        $address = $street . ", " . $zipcode . " " . $city;
+        //
+        foreach($filters as $filter) {
+            $distance = Geo::distance($address, 
+                                      $filter->street . ", " . $filter->zipcode . " " . $filter->city);
+            if ($distance->distance <= $slider) {
+                array_push($filtered, $filter);
+            }
+        }
+        //dd($filters);
         $users = User::all();
         $interests = Interest::all();
-        return view('users.show', compact('users', 'interests', 'filters'));
+        return view('users.show', compact('users', 'interests', 'filtered'));
     }
 
     public function geofilter(Request $request, User $user)

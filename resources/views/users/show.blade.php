@@ -25,18 +25,18 @@
 			  <option value="Expert">Expert</option>
 			</select>
 			<div class="slidecontainer">
-	  			<input type="range" min="1" max="160" value="50" class="slider" id="distance">
+	  			<input type="range" name="slider" min="1" max="160" value="50" class="slider" id="distance">
 			</div>
 			<input type="submit" class="" name="btnSearch" id="btnSearch" value="search">
 		</form>
 	</div>
 	<ul>
 	{{-- Search Results --}}
-	@if (isset($filters))
-	@if ($filters->isEmpty())
+	@if (isset($filtered))
+	@if (empty($filtered))
 		<p>Apply filter to view users</p>
 	@endif
-	@foreach ($filters as $filter)
+	@foreach ($filtered as $filter)
 		<li><a href="/users/{{ $filter->userid }}">{{ $filter->name }}</a> | <a href="/users/{{$filter->id}}/sent">Add Friend</a> </li>
 	@endforeach
 	@endif
